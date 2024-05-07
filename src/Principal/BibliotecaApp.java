@@ -207,20 +207,24 @@ public class BibliotecaApp {
 
     // Método para carregar os dados dos livros de um arquivo
     private static void carregarDados() {
-        List<String> dados = fileManager.carregarDados(); // Aqui estamos carregando os dados do arquivo
-        for (String linha : dados) {
-            String[] partes = linha.split(",");
-            if (partes.length >= 2) { // Verificar se há pelo menos dois elementos no array partes
-                String titulo = partes[0];
-                String nomeAutor = partes[1]; // Obter o nome do autor a partir dos dados carregados
-                Autor autor = new Autor(nomeAutor); // Criar um objeto Autor com o nome obtido
-                Genero genero = new Genero(partes[2]);
-                Editora editora = new Editora(partes[3]);
-                int anoPublicacao = Integer.parseInt(partes[4]); // Obter o ano de publicação e converter para inteiro
-                Livro livro = new Livro(titulo, autor, genero, editora, anoPublicacao);
-                livros.add(livro);
+        List<String> dados = fileManager.carregarDados(); // Carrega os dados do arquivo usando o objeto FileManager
+        for (String linha : dados) { // Percorre as linhas de dados carregadas
+            String[] partes = linha.split(",");  // Divide a linha de dados em partes separadas por vírgula
+            if (partes.length >= 5) { // Verifica se há pelo menos cinco elementos no array partes
+                String titulo = partes[0]; // Obtém o título do livro a partir dos dados carregados
+                String nomeAutor = partes[1]; // Obtém o nome do autor
+                Autor autor = new Autor(nomeAutor); // Criar um objeto Autor com o nome do autor
+                Genero genero = new Genero(partes[2]); // Cria um novo objeto Genero com o nome do gênero
+                Editora editora = new Editora(partes[3]); // Cria um novo objeto Editora com o nome da editora
+                try {
+                    int anoPublicacao = Integer.parseInt(partes[4]); // Tenta converter a string do ano de publicação em um número inteiro
+                    Livro livro = new Livro(titulo, autor, genero, editora, anoPublicacao); // Cria um novo objeto Livro com os dados obtidos
+                    livros.add(livro); // Adiciona o livro à lista de livros
+                } catch (NumberFormatException e) {
+                    System.out.println("Ano de publicação inválido para o livro: " + linha); // Informa ao usuário que o ano de publicação é inválido
+                }
             } else {
-                System.out.println("Dados incompletos para o livro: " + linha);
+                System.out.println("Dados incompletos para o livro: " + linha); // Informa ao usuário que os dados para o livro são incompletos
             }
         }
     }
