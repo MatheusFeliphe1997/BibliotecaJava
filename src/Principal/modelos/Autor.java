@@ -1,8 +1,11 @@
 package Principal.modelos;
 
 public class Autor {
-    public String nome;
+    private String nome;
 
+    public Autor(String nome) {
+        this.nome = nome;
+    }
 
     public String getNome() {
         return nome;
@@ -10,11 +13,5 @@ public class Autor {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    @Override
-    public String toString() {
-        return "Autor{" +
-                "nome='" + nome + '\'' +
-                '}';
     }
 }

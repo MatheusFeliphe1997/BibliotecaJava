@@ -7,14 +7,13 @@ public class Livro {
     private Editora editora;
     private int anoPublicacao;
 
-    public Livro(String titulo, Autor autor, Genero genero, Editora editora) {
+    public Livro(String titulo, Autor autor, Genero genero, Editora editora, int anoPublicacao) {
         this.titulo = titulo;
         this.autor = autor;
         this.genero = genero;
         this.editora = editora;
         this.anoPublicacao = anoPublicacao;
     }
-
 
     public String getTitulo() {
         return titulo;
@@ -55,7 +54,7 @@ public class Livro {
     public void setAnoPublicacao(int anoPublicacao) {
         this.anoPublicacao = anoPublicacao;
     }
-    
+
     @Override
     public String toString() {
         return "Livro{" +
@@ -63,6 +62,7 @@ public class Livro {
                 ", autor=" + autor +
                 ", genero=" + genero +
                 ", editora=" + editora +
+                ", anoPublicacao=" + anoPublicacao +
                 '}';
     }
 }

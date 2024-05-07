@@ -70,7 +70,7 @@ public class BibliotecaApp {
 
         System.out.println("Digite o nome do autor:");
         String nomeAutor = scanner.nextLine();
-        Autor autor = new Autor(); // Cria um novo objeto Autor
+        Autor autor = new Autor(nomeAutor); // Cria um novo objeto Autor
         autor.setNome(nomeAutor); // Define o nome do autor usando o método setNome
 
         System.out.println("Digite o nome do gênero:");
@@ -81,7 +81,11 @@ public class BibliotecaApp {
         String nomeEditora = scanner.nextLine();
         Editora editora = new Editora(nomeEditora);
 
-        Livro livro = new Livro(titulo, autor, genero, editora);
+        System.out.println("Digite o ano de publicação:");
+        int anoPublicacao = scanner.nextInt();
+        scanner.nextLine(); // Limpar o buffer do scanner
+
+        Livro livro = new Livro(titulo, autor, genero, editora, anoPublicacao);
         livros.add(livro);
         System.out.println("Livro adicionado com sucesso!");
     }
@@ -165,13 +169,15 @@ public class BibliotecaApp {
             System.out.println("Livro não encontrado.");
         }
     }
+
     private static void salvarDados() {
         List<String> dados = new ArrayList<>();
         for (Livro livro : livros) {
             String linha = livro.getTitulo() + "," +
                     livro.getAutor().getNome() + "," +
                     livro.getGenero().getNome() + "," +
-                    livro.getEditora().getNome();
+                    livro.getEditora().getNome() + "," +
+                    livro.getAnoPublicacao();
             dados.add(linha);
         }
         fileManager.salvarDados(dados);
@@ -181,13 +187,18 @@ public class BibliotecaApp {
         List<String> dados = fileManager.carregarDados(); // Aqui estamos carregando os dados do arquivo
         for (String linha : dados) {
             String[] partes = linha.split(",");
-            String titulo = partes[0];
-            Autor autor = new Autor(); // Criar um objeto Autor vazio
-            autor.setNome(partes[1]); // Definir o nome do autor usando o método setNome
-            Genero genero = new Genero(partes[2]);
-            Editora editora = new Editora(partes[3]);
-            Livro livro = new Livro(titulo, autor, genero, editora);
-            livros.add(livro);
+            if (partes.length >= 2) { // Verificar se há pelo menos dois elementos no array partes
+                String titulo = partes[0];
+                String nomeAutor = partes[1]; // Obter o nome do autor a partir dos dados carregados
+                Autor autor = new Autor(nomeAutor); // Criar um objeto Autor com o nome obtido
+                Genero genero = new Genero(partes[2]);
+                Editora editora = new Editora(partes[3]);
+                int anoPublicacao = Integer.parseInt(partes[4]); // Obter o ano de publicação e converter para inteiro
+                Livro livro = new Livro(titulo, autor, genero, editora, anoPublicacao);
+                livros.add(livro);
+            } else {
+                System.out.println("Dados incompletos para o livro: " + linha);
+            }
         }
     }
 }
