@@ -17,8 +17,6 @@ public class Editora {
 
     @Override
     public String toString() {
-        return "Editora{" +
-                "nome='" + nome + '\'' +
-                '}';
+        return nome ;
     }
 }

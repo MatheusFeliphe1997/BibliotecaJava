@@ -1,8 +1,9 @@
 package Principal; // Declaração do pacote para o código
 
 import Principal.modelos.*; // Importa todas as classes do pacote "modelos" dentro do pacote "Principal".
-
 import java.util.ArrayList; // Importa a classe ArrayList da biblioteca Java util para criar listas.
+import java.util.Collections; // Importa a classe Collections para trabalhar com ordenação
+import java.util.Comparator; // Importa a classe Comparator para definir regras de ordenação
 import java.util.Date; // Importa a classe Date da biblioteca Java util para trabalhar com datas.
 import java.util.List; // Importa a interface List da biblioteca Java util para definir tipos de lista.
 import java.util.Scanner; // Importa a classe Scanner da biblioteca Java util para ler entradas do usuário.
@@ -52,13 +53,13 @@ public class BibliotecaApp {
                     removerLivro(scanner);
                     break;
                 case 3:
-                    // Implemente a operação de pesquisar livro aqui...
+                    pesquisarLivro(scanner);
                     break;
                 case 4:
                     listarLivros();
                     break;
                 case 5:
-                    // Implemente a operação de listar livros ordenados aqui...
+                    listarLivrosOrdenados();
                     break;
                 case 6:
                     emprestarLivro(scanner);
@@ -125,7 +126,24 @@ public class BibliotecaApp {
             System.out.println("Livro não encontrado.");
         }
     }
+    private static void pesquisarLivro(Scanner scanner) {
+        System.out.println("Digite o título do livro que deseja pesquisar:");
+        String tituloPesquisa = scanner.nextLine().toLowerCase(); // Obtém o título do livro a ser pesquisado
 
+        boolean encontrado = false; // Variável para controlar se o livro foi encontrado
+        for (Livro livro : livros) {
+            // Verifica se o título do livro atual contém o termo de pesquisa (ignorando maiúsculas/minúsculas)
+            if (livro.getTitulo().toLowerCase().contains(tituloPesquisa)) {
+                System.out.println("Livro encontrado:");
+                System.out.println(livro); // Exibe as informações do livro encontrado
+                encontrado = true;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Livro não encontrado.");
+        }
+    }
     // Método para listar todos os livros
     private static void listarLivros() {
         if (livros.isEmpty()) {
@@ -134,6 +152,20 @@ public class BibliotecaApp {
             System.out.println("Lista de livros:");
             for (Livro livro : livros) {
                 System.out.println(livro);
+            }
+        }
+    }
+    // Método para listar todos os livros
+    private static void listarLivrosOrdenados() {
+        if (livros.isEmpty()) { // Verifica se a lista de livros está vazia
+            System.out.println("Não há livros cadastrados."); // Informa ao usuário que não há livros cadastrados
+        } else {
+            // Ordena a lista de livros pelo título
+            Collections.sort(livros, Comparator.comparing(Livro::getTitulo));
+
+            System.out.println("Lista de livros ordenados por título:"); // Informa ao usuário que será listada a lista de livros ordenados
+            for (Livro livro : livros) { // Percorre a lista de livros ordenados
+                System.out.println(livro); // Imprime as informações de cada livro na lista
             }
         }
     }
