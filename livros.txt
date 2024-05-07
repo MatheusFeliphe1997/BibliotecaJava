@@ -1,5 +1,14 @@
-O Senhor dos Anéis: A Sociedade do Anel, J.R.R. Tolkien,Fantasia,Martins Fontes,1954
-As Crônicas de Nárnia: O Leão, a Feiticeira e o Guarda-Roupa,C.S. Lewis,Fantasia,WMF Martins Fontes,1950
-Harry Potter e a Pedra Filosofal,J.K. Rowling,Fantasia,Rocco,1997
-A Game of Thrones,George R.R. Martin,Fantasia,Suma,1996
+2001 Uma Odisseia no Espaço,Arthur C. Clarke,Ficção Científica,Record,1968
 A Bússola de Ouro,Philip Pullman,Fantasia,Objetiva,1995
+A Game of Thrones,George R.R. Martin,Fantasia,Suma,1996
+Anna Karenina,Leon Tolstói,Romance,1878,1878
+Cem Anos de Solidão,Gabriel García Márquez,Romance,Record,1967
+Dom Casmurro,Machado de Assis,Romance,Nova Fronteira,1899
+Duna,Frank Herbert,Ficção Científica,Aleph,1965
+Harry Potter e a Pedra Filosofal,J.K. Rowling,Fantasia,Rocco,1997
+Neuromancer,William Gibson,Ficção Científica,Wmf,1984
+O Grande Gatsby,F. Scott Fitzgerald,Romance,Companhia das Letras,1925
+O Guia do Mochileiro das Galáxias,Douglas Adams,Ficção Científica,Intrínseca,1979
+O Senhor dos Anéis: A Sociedade do Anel, J.R.R. Tolkien,Fantasia,Martins Fontes,1954
+O jogo de Ender,Orson Scott Card,Ficção Científica,Suma,1985
+Orgulho e Preconceito,Jane Austen,Romance,Wmf,1813
