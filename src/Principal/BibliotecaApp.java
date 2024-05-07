@@ -1,24 +1,34 @@
-package Principal;
+package Principal; // Declaração do pacote para o código
 
-import Principal.modelos.*;
+import Principal.modelos.*; // Importa todas as classes do pacote "modelos" dentro do pacote "Principal".
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.ArrayList; // Importa a classe ArrayList da biblioteca Java util para criar listas.
+import java.util.Date; // Importa a classe Date da biblioteca Java util para trabalhar com datas.
+import java.util.List; // Importa a interface List da biblioteca Java util para definir tipos de lista.
+import java.util.Scanner; // Importa a classe Scanner da biblioteca Java util para ler entradas do usuário.
 
-
+// Classe principal do aplicativo da biblioteca
 public class BibliotecaApp {
+    // Lista para armazenar objetos da classe Livro
     private static List<Livro> livros = new ArrayList<>();
+    // Objeto FileManager para gerenciar arquivos
     private static FileManager fileManager = new FileManager("livros.txt");
+    // Lista para armazenar objetos da classe Emprestimo
     private static List<Emprestimo> emprestimos = new ArrayList<>();
+    // Lista para armazenar objetos da classe Devolucao
     private static List<Devolucao> devolucoes = new ArrayList<>();
 
+    // Método principal da classe
     public static void main(String[] args) {
-        carregarDados(); // Carregar dados do arquivo ao iniciar o programa
+        // Carrega dados do arquivo ao iniciar o programa
+        carregarDados();
+        // Cria um objeto Scanner para ler entradas do usuário
         Scanner scanner = new Scanner(System.in);
+        // Variável para controlar o loop do menu
         int opcao;
+        // Loop do menu principal
         do {
+            // Exibe o menu de opções
             System.out.println("BIBLIOTECA");
             System.out.println("1. Adicionar livro");
             System.out.println("2. Remover livro");
@@ -29,9 +39,11 @@ public class BibliotecaApp {
             System.out.println("7. Devolução de livro");
             System.out.println("8. Sair");
             System.out.print("Escolha uma opção: ");
+            // Lê a opção do usuário
             opcao = scanner.nextInt();
             scanner.nextLine(); // Limpar o buffer do scanner
 
+            // Switch para tratar as opções do menu
             switch (opcao) {
                 case 1:
                     adicionarLivro(scanner);
@@ -64,7 +76,9 @@ public class BibliotecaApp {
         } while (opcao != 8);
     }
 
+    // Método para adicionar um livro
     private static void adicionarLivro(Scanner scanner) {
+        // Solicita ao usuário informações sobre o livro
         System.out.println("Digite o título do livro:");
         String titulo = scanner.nextLine();
 
@@ -75,26 +89,30 @@ public class BibliotecaApp {
 
         System.out.println("Digite o nome do gênero:");
         String nomeGenero = scanner.nextLine();
-        Genero genero = new Genero(nomeGenero);
+        Genero genero = new Genero(nomeGenero); // Cria um novo objeto Genero
 
         System.out.println("Digite o nome da editora:");
         String nomeEditora = scanner.nextLine();
-        Editora editora = new Editora(nomeEditora);
+        Editora editora = new Editora(nomeEditora); // Cria um novo objeto Editora
 
         System.out.println("Digite o ano de publicação:");
-        int anoPublicacao = scanner.nextInt();
+        int anoPublicacao = scanner.nextInt();// Lê o ano de publicação do livro
         scanner.nextLine(); // Limpar o buffer do scanner
 
+        // Cria um novo objeto Livro com os dados informados e o adiciona à lista de livros
         Livro livro = new Livro(titulo, autor, genero, editora, anoPublicacao);
         livros.add(livro);
         System.out.println("Livro adicionado com sucesso!");
     }
 
+    // Método para remover um livro
     private static void removerLivro(Scanner scanner) {
         System.out.println("Digite o título do livro que deseja remover:");
         String titulo = scanner.nextLine();
         Livro livroRemover = null;
+        // Procura o livro na lista de livros pelo título fornecido
         for (Livro livro : livros) {
+            // Remove o livro da lista, se encontrado
             if (livro.getTitulo().equalsIgnoreCase(titulo)) {
                 livroRemover = livro;
                 break;
@@ -108,6 +126,7 @@ public class BibliotecaApp {
         }
     }
 
+    // Método para listar todos os livros
     private static void listarLivros() {
         if (livros.isEmpty()) {
             System.out.println("Não há livros cadastrados.");
@@ -119,6 +138,7 @@ public class BibliotecaApp {
         }
     }
 
+    // Método para realizar o empréstimo de um livro
     private static void emprestarLivro(Scanner scanner) {
         System.out.println("Digite o título do livro que deseja emprestar:");
         String titulo = scanner.nextLine();
@@ -151,6 +171,7 @@ public class BibliotecaApp {
         }
     }
 
+    // Método para realizar a devolução de um livro
     private static void devolverLivro(Scanner scanner) {
         System.out.println("Digite o título do livro que deseja devolver:");
         String titulo = scanner.nextLine();
@@ -170,6 +191,7 @@ public class BibliotecaApp {
         }
     }
 
+    // Método para salvar os dados dos livros em um arquivo
     private static void salvarDados() {
         List<String> dados = new ArrayList<>();
         for (Livro livro : livros) {
@@ -183,6 +205,7 @@ public class BibliotecaApp {
         fileManager.salvarDados(dados);
     }
 
+    // Método para carregar os dados dos livros de um arquivo
     private static void carregarDados() {
         List<String> dados = fileManager.carregarDados(); // Aqui estamos carregando os dados do arquivo
         for (String linha : dados) {
